@@ -28,41 +28,13 @@
   }
   header{
     width:100%;
-    padding:26px 24px 18px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
+    line-height:0;
     border-bottom:5px solid var(--negro);
   }
-  .marca{
-    display:flex;
-    flex-direction:column;
-  }
-  .marca-eyebrow{
-    font-family:'Inter', sans-serif;
-    font-size:11px;
-    letter-spacing:2px;
-    font-weight:800;
-    color:var(--negro);
-  }
-  .marca-nombre{
-    font-family:'Archivo Black', sans-serif;
-    font-size:26px;
-    color:var(--negro);
-    letter-spacing:-0.5px;
-    display:flex;
-    align-items:center;
-    gap:8px;
-  }
-  .chevron-badge{
-    display:inline-flex;
-    background:var(--rojo);
-    color:var(--crema);
-    padding:3px 10px 5px;
-    font-size:18px;
-    border-radius:4px;
-    transform:skewX(-10deg);
-    font-family:'Archivo Black', sans-serif;
+  .banner-img{
+    width:100%;
+    height:auto;
+    display:block;
   }
 
   main{
@@ -255,10 +227,7 @@
 <body>
 
 <header>
-  <div class="marca">
-    <span class="marca-eyebrow">TARJETA</span>
-    <span class="marca-nombre">Sucrédito <span class="chevron-badge">»</span></span>
-  </div>
+  <img src="banner-sucredito.png" alt="Tarjeta Sucrédito" class="banner-img">
 </header>
 
 <main>
