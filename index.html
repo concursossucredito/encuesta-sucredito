@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Encuesta Sucrédito</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@1,800&family=Archivo+Black&family=Inter:wght@500;600;700;800&display=swap" rel="stylesheet">
 <style>
   :root{
     --amarillo:#FFEE00;
@@ -28,14 +28,40 @@
   }
   header{
     width:100%;
-    line-height:0;
+    background:var(--amarillo);
+    padding:20px 24px;
+    display:flex;
+    align-items:center;
+    gap:12px;
     border-bottom:5px solid var(--negro);
   }
-  .banner-img{
-    width:100%;
-    height:auto;
-    display:block;
+  .marca{
+    display:flex;
+    flex-direction:column;
+    line-height:1;
   }
+  .marca-eyebrow{
+    font-family:'Inter', sans-serif;
+    font-size:11px;
+    letter-spacing:3px;
+    font-weight:800;
+    color:var(--negro);
+    margin-bottom:2px;
+  }
+  .marca-nombre{
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  .marca-nombre span{
+    font-family:'Poppins', sans-serif;
+    font-weight:800;
+    font-style:italic;
+    font-size:30px;
+    color:var(--negro);
+    letter-spacing:-0.5px;
+  }
+  .marca-nombre svg{ flex-shrink:0; }
 
   main{
     width:100%;
@@ -260,7 +286,14 @@
     display:flex;
     align-items:center;
     justify-content:center;
-    gap:8px;
+    flex-wrap:wrap;
+    gap:6px;
+  }
+  footer.footer-marca .footer-marca-grupo{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    white-space:nowrap;
   }
   footer.footer-marca span.texto{
     font-family:'Archivo Black', sans-serif;
@@ -268,20 +301,22 @@
     color:rgba(20,18,12,0.55);
     letter-spacing:.4px;
   }
-  footer.footer-marca .chev-footer{
-    background:var(--rojo);
-    color:var(--crema);
-    padding:2px 6px 3px;
-    border-radius:3px;
-    transform:skewX(-10deg);
-    font-size:11px;
-  }
 </style>
 </head>
 <body>
 
 <header>
-  <img src="banner-sucredito.png" alt="Tarjeta Sucrédito" class="banner-img">
+  <div class="marca">
+    <span class="marca-eyebrow">TARJETA</span>
+    <div class="marca-nombre">
+      <span>Sucrédito</span>
+      <svg width="30" height="22" viewBox="0 0 34 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="34" height="24" rx="5" fill="#E4032E"/>
+        <path d="M7 5 L15 12 L7 19" stroke="white" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M17 5 L25 12 L17 19" stroke="white" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+  </div>
 </header>
 
 <main>
@@ -403,8 +438,15 @@
 </main>
 
 <footer class="footer-marca">
-  <span class="chev-footer">»</span>
-  <span class="texto">SUCRÉDITO — LA TARJETA DE LOS ESPECTÁCULOS</span>
+  <span class="footer-marca-grupo">
+    <span class="texto">SUCRÉDITO</span>
+    <svg width="20" height="15" viewBox="0 0 34 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect width="34" height="24" rx="5" fill="#E4032E"/>
+      <path d="M7 5 L15 12 L7 19" stroke="white" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M17 5 L25 12 L17 19" stroke="white" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </span>
+  <span class="texto">— LA TARJETA DE LOS ESPECTÁCULOS</span>
 </footer>
 
 <script>
