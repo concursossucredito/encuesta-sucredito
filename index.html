@@ -41,7 +41,7 @@
     width:100%;
     max-width:540px;
     flex:1;
-    padding:30px 20px 60px;
+    padding:30px 20px 40px;
   }
 
   /* progreso con chevrons estilo isologo: badge rojo con » blanco */
@@ -58,10 +58,17 @@
     padding:4px 9px 6px;
     border-radius:4px;
     transform:skewX(-10deg);
+    transition:background .25s ease, color .25s ease;
   }
   .progreso .chev.activo{
     color:var(--crema);
     background:var(--rojo);
+    animation:chevPop .3s ease;
+  }
+  @keyframes chevPop{
+    0%{ transform:skewX(-10deg) scale(0.7); }
+    60%{ transform:skewX(-10deg) scale(1.18); }
+    100%{ transform:skewX(-10deg) scale(1); }
   }
 
   .paso{ display:none; }
@@ -73,6 +80,11 @@
     border-radius:16px;
     padding:28px 24px;
     box-shadow:7px 7px 0 var(--negro);
+    animation:apareceCard .35s ease;
+  }
+  @keyframes apareceCard{
+    from{ opacity:0; transform:translateY(14px); }
+    to{ opacity:1; transform:translateY(0); }
   }
 
   .intro h1{
@@ -132,14 +144,25 @@
     background:var(--crema);
     cursor:pointer;
     text-align:left;
-    transition:background .15s, color .15s, transform .1s;
+    box-shadow:0 0 0 var(--negro);
+    transition:background .15s ease, color .15s ease, transform .15s ease, box-shadow .15s ease;
   }
-  .opcion:hover{ background:#fff6b8; }
-  .opcion:active{ transform:scale(.98); }
+  .opcion:hover{
+    background:#fff6b8;
+    transform:translate(-2px,-2px);
+    box-shadow:3px 3px 0 var(--negro);
+  }
+  .opcion:active{ transform:scale(.97); }
   .opcion.seleccionada{
     background:var(--negro);
     color:var(--amarillo);
     border-color:var(--negro);
+    animation:popSeleccion .28s ease;
+  }
+  @keyframes popSeleccion{
+    0%{ transform:scale(1); }
+    45%{ transform:scale(1.045); }
+    100%{ transform:scale(1); }
   }
 
   .otro-input{
@@ -153,7 +176,10 @@
     font-family:'Inter', sans-serif;
     font-weight:600;
   }
-  .otro-input.visible{ display:block; }
+  .otro-input.visible{
+    display:block;
+    animation:apareceCard .25s ease;
+  }
 
   textarea, input[type=email]{
     width:100%;
@@ -165,12 +191,17 @@
     font-weight:600;
     resize:vertical;
     min-height:90px;
+    transition:box-shadow .15s ease;
   }
   input[type=email]{ min-height:unset; }
+  textarea:focus, input[type=email]:focus, .otro-input:focus{
+    outline:none;
+    box-shadow:3px 3px 0 var(--negro);
+  }
 
   .nav{
     display:flex;
-    justify-content:space-between;
+    justify-content:center;
     align-items:center;
     margin-top:22px;
     gap:10px;
@@ -188,9 +219,10 @@
     color:var(--crema);
     flex:1;
     box-shadow:0 4px 0 var(--rojo-oscuro);
-    transition:transform .08s;
+    transition:transform .08s ease, box-shadow .08s ease, opacity .15s ease;
   }
-  .btn-siguiente:active{ transform:translateY(3px); box-shadow:none; }
+  .btn-siguiente:hover:not(:disabled){ filter:brightness(1.05); }
+  .btn-siguiente:active:not(:disabled){ transform:translateY(3px); box-shadow:none; }
   .btn-siguiente:disabled{ opacity:.35; cursor:not-allowed; }
   .btn-atras{
     background:transparent;
@@ -198,10 +230,17 @@
     font-weight:800;
     font-family:'Inter', sans-serif;
     padding:14px 6px;
+    transition:opacity .15s ease;
   }
+  .btn-atras:hover{ opacity:.6; }
 
   .final{ text-align:center; }
-  .final .icono{ font-size:44px; margin-bottom:12px; }
+  .final .icono{
+    font-size:44px;
+    margin-bottom:12px;
+    display:inline-block;
+    animation:popSeleccion .5s ease;
+  }
   .final h2{
     font-family:'Archivo Black', sans-serif;
     font-size:21px;
@@ -214,13 +253,28 @@
     line-height:1.55;
   }
 
-  .aviso-editar{
+  footer.footer-marca{
     max-width:540px;
-    margin:18px 20px 0;
-    font-size:11.5px;
-    color:rgba(20,18,12,0.55);
-    font-weight:700;
+    margin:20px 20px 30px;
     text-align:center;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+  }
+  footer.footer-marca span.texto{
+    font-family:'Archivo Black', sans-serif;
+    font-size:12px;
+    color:rgba(20,18,12,0.55);
+    letter-spacing:.4px;
+  }
+  footer.footer-marca .chev-footer{
+    background:var(--rojo);
+    color:var(--crema);
+    padding:2px 6px 3px;
+    border-radius:3px;
+    transform:skewX(-10deg);
+    font-size:11px;
   }
 </style>
 </head>
@@ -255,7 +309,7 @@
           <button type="button" class="opcion" data-valor="Tengo poco límite disponible">Tengo poco límite disponible</button>
           <button type="button" class="opcion" data-valor="Prefiero utilizar otra tarjeta">Prefiero utilizar otra tarjeta</button>
           <button type="button" class="opcion" data-valor="Tuve una mala experiencia">Tuve una mala experiencia</button>
-          <button type="button" class="opcion" data-valor="Tengo muchos compromisos de pago.">Tengo muchos compromisos de pago.</button>
+          <button type="button" class="opcion" data-valor="Tengo muchos compromisos de pago">Tengo muchos compromisos de pago</button>
           <button type="button" class="opcion" data-valor="Actualmente no necesito utilizar una tarjeta">Actualmente no necesito utilizar una tarjeta</button>
           <button type="button" class="opcion" data-valor="Otro" data-otro="1">Otro motivo</button>
         </div>
@@ -348,18 +402,20 @@
   </form>
 </main>
 
-<p class="aviso-editar">SuCredito - La Tarjeta de los Espectaculos</p>
+<footer class="footer-marca">
+  <span class="chev-footer">»</span>
+  <span class="texto">SUCRÉDITO — LA TARJETA DE LOS ESPECTÁCULOS</span>
+</footer>
 
 <script>
-  // ======= CONFIG: pegar acá la URL del Google Apps Script Web App =======
+  // ======= CONFIG: URL del Google Apps Script Web App =======
   const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyeZ5unCcRN6oqa6vgxVXqL23EoNfQ3dOqt4pP6tWaaneqLFj9WQeWjP8BYoKjXFXi5/exec";
-  // =========================================================================
+  // ============================================================
 
   const respuestas = {};
   let pasoActual = 0;
   const pasos = document.querySelectorAll('.paso');
   const totalPasos = pasos.length - 1; // sin contar el paso final (index 7)
-  const pasosConPregunta = [1,2,3,4,5,6]; // los que requieren respuesta para avanzar
 
   function pintarProgreso(){
     const cont = document.getElementById('progreso');
@@ -375,7 +431,12 @@
   function mostrarPaso(i){
     pasos.forEach(p=>p.classList.remove('visible'));
     pasos[i].classList.add('visible');
-    document.getElementById('btnAtras').style.visibility = i===0 ? 'hidden':'visible';
+
+    const btnAtras = document.getElementById('btnAtras');
+    // en el paso 0 sacamos "Atrás" del layout por completo (no solo invisible)
+    // para que "Comenzar" quede centrado y a todo lo ancho
+    btnAtras.style.display = (i===0) ? 'none' : 'inline-block';
+
     const btnSig = document.getElementById('btnSiguiente');
     if(i===7){
       document.getElementById('navegacion').style.display='none';
