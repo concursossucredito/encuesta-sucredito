@@ -207,7 +207,7 @@
     animation:apareceCard .25s ease;
   }
 
-  textarea, input[type=email]{
+  textarea, input[type=email], input[type=text].campo-simple, input[type=tel]{
     width:100%;
     border:2.5px solid var(--negro);
     border-radius:10px;
@@ -219,10 +219,22 @@
     min-height:90px;
     transition:box-shadow .15s ease;
   }
-  input[type=email]{ min-height:unset; }
-  textarea:focus, input[type=email]:focus, .otro-input:focus{
+  input[type=email], input[type=text].campo-simple, input[type=tel]{ min-height:unset; }
+  textarea:focus, input[type=email]:focus, input[type=text].campo-simple:focus, input[type=tel]:focus, .otro-input:focus{
     outline:none;
     box-shadow:3px 3px 0 var(--negro);
+  }
+
+  .campo-grupo{ margin-bottom:16px; }
+  .campo-grupo:last-child{ margin-bottom:0; }
+  .campo-label{
+    display:block;
+    font-size:12.5px;
+    font-weight:800;
+    color:var(--gris);
+    text-transform:uppercase;
+    letter-spacing:.5px;
+    margin-bottom:8px;
   }
 
   .nav{
@@ -413,11 +425,20 @@
       </div>
     </div>
 
-    <!-- Paso 6: email -->
+    <!-- Paso 6: DNI + email -->
     <div class="paso" data-paso="6">
       <div class="tarjeta">
-        <div class="pregunta">Dejanos tu email para enviarte tu beneficio</div>
-        <input type="email" data-campo="email" placeholder="tu@email.com" required>
+        <div class="pregunta">Dejanos tus datos para enviarte tu beneficio</div>
+
+        <div class="campo-grupo">
+          <label class="campo-label" for="campoDni">DNI</label>
+          <input type="text" id="campoDni" class="campo-simple" data-campo="dni" inputmode="numeric" pattern="[0-9]*" maxlength="9" placeholder="Sin puntos, ej: 30123456" required>
+        </div>
+
+        <div class="campo-grupo">
+          <label class="campo-label" for="campoEmail">Email</label>
+          <input type="email" id="campoEmail" data-campo="email" placeholder="tu@email.com" required>
+        </div>
       </div>
     </div>
 
@@ -485,10 +506,16 @@
     } else {
       document.getElementById('navegacion').style.display='flex';
       if(i===0){ btnSig.textContent = 'Comenzar'; btnSig.disabled = false; }
-      else if(i===6){ btnSig.textContent = 'Enviar'; btnSig.disabled = !respuestas[i]; }
+      else if(i===6){ btnSig.textContent = 'Enviar'; btnSig.disabled = !pasoSeisValido(); }
       else { btnSig.textContent = 'Siguiente'; btnSig.disabled = !respuestas[i]; }
     }
     pintarProgreso();
+  }
+
+  function pasoSeisValido(){
+    const dni = (respuestas['valor_dni']||'').trim();
+    const email = (respuestas['valor_email']||'').trim();
+    return dni.length >= 7 && email.length > 3 && email.includes('@');
   }
 
   // Opciones tipo botón (single-select)
@@ -520,10 +547,16 @@
     }
   });
 
-  // Campos de texto (textarea, email, "otro")
+  // Campos de texto (textarea, email, dni, "otro")
   document.querySelectorAll('textarea[data-campo], input[data-campo], .otro-input').forEach(campo=>{
     campo.addEventListener('input', ()=>{
       const pasoDiv = campo.closest('.paso');
+
+      // DNI: solo números
+      if(campo.dataset.campo === 'dni'){
+        campo.value = campo.value.replace(/\D/g,'');
+      }
+
       if(campo.classList.contains('otro-input')){
         respuestas['valor_'+campo.dataset.campoOtro] = campo.value;
       } else {
@@ -536,7 +569,11 @@
 
   function actualizarBoton(){
     if(pasoActual===0) return;
-    document.getElementById('btnSiguiente').disabled = !respuestas[pasoActual];
+    if(pasoActual===6){
+      document.getElementById('btnSiguiente').disabled = !pasoSeisValido();
+    } else {
+      document.getElementById('btnSiguiente').disabled = !respuestas[pasoActual];
+    }
   }
 
   document.getElementById('btnAtras').addEventListener('click', ()=>{
@@ -557,6 +594,7 @@
         incentivo_clave: respuestas['valor_incentivo_clave'] || '',
         probabilidad_retorno: respuestas['valor_probabilidad_retorno'] || '',
         mejora_sugerida: respuestas['valor_mejora_sugerida'] || '',
+        dni: respuestas['valor_dni'] || '',
         email: respuestas['valor_email'] || '',
         fecha: new Date().toISOString()
       };
