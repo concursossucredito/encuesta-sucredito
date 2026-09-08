@@ -256,6 +256,34 @@
     display:inline-block;
     animation:popSeleccion .5s ease;
   }
+  .final .placa-beneficio{
+    width:100%;
+    max-width:340px;
+    display:block;
+    margin:4px auto 18px;
+    border-radius:14px;
+    animation:apareceConfeti .6s cubic-bezier(.34,1.56,.64,1);
+  }
+  @keyframes apareceConfeti{
+    0%{ opacity:0; transform:scale(.6) rotate(-6deg); }
+    60%{ opacity:1; transform:scale(1.06) rotate(2deg); }
+    100%{ opacity:1; transform:scale(1) rotate(0deg); }
+  }
+  .confeti-pieza{
+    position:fixed;
+    top:-20px;
+    width:9px;
+    height:14px;
+    z-index:999;
+    pointer-events:none;
+    animation-name:caerConfeti;
+    animation-timing-function:linear;
+    animation-fill-mode:forwards;
+  }
+  @keyframes caerConfeti{
+    0%{ transform:translateY(0) rotate(0deg); opacity:1; }
+    100%{ transform:translateY(110vh) rotate(600deg); opacity:0.9; }
+  }
   .final h2{
     font-family:'Archivo Black', sans-serif;
     font-size:21px;
@@ -412,6 +440,7 @@
     <!-- Paso final -->
     <div class="paso final" data-paso="7">
       <div class="tarjeta">
+        <img class="placa-beneficio" src="assets/beneficio.png" alt="Tu beneficio Sucrédito">
         <div class="icono">✅</div>
         <h2>¡Listo, gracias!</h2>
         <p>Recibimos tus respuestas. Muy pronto vas a recibir tu beneficio por email.</p>
@@ -458,6 +487,24 @@
     }
   }
 
+  function lanzarConfeti(){
+    const colores = ['#E4032E', '#FFEE00', '#14120C', '#FFFDF3', '#A80121'];
+    const cantidad = 60;
+    for(let i=0;i<cantidad;i++){
+      const pieza = document.createElement('div');
+      pieza.className = 'confeti-pieza';
+      pieza.style.left = Math.random()*100 + 'vw';
+      pieza.style.background = colores[Math.floor(Math.random()*colores.length)];
+      const duracion = 2.2 + Math.random()*1.6;
+      const retraso = Math.random()*0.5;
+      pieza.style.animationDuration = duracion + 's';
+      pieza.style.animationDelay = retraso + 's';
+      pieza.style.transform = 'rotate(' + Math.floor(Math.random()*360) + 'deg)';
+      document.body.appendChild(pieza);
+      setTimeout(()=>pieza.remove(), (duracion+retraso)*1000 + 200);
+    }
+  }
+
   function mostrarPaso(i){
     pasos.forEach(p=>p.classList.remove('visible'));
     pasos[i].classList.add('visible');
@@ -470,6 +517,7 @@
     const btnSig = document.getElementById('btnSiguiente');
     if(i===7){
       document.getElementById('navegacion').style.display='none';
+      lanzarConfeti();
     } else {
       document.getElementById('navegacion').style.display='flex';
       if(i===0){ btnSig.textContent = 'Comenzar'; btnSig.disabled = false; }
