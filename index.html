@@ -767,14 +767,14 @@
     // Aparece inmediatamente en el centro y queda allí ~1 segundo.
     logo.style.willChange = 'transform';
     logo.style.transformOrigin = 'center center';
-    logo.style.transform = `translate(${dx}px, ${dy}px) scale(2.35)`;
+    logo.style.transform = `translate(${dx}px, ${dy}px) scale(1.17)`;
     logo.getBoundingClientRect();
 
     // Después se acomoda de forma corta y fluida.
     setTimeout(()=>{
       const animacion = logo.animate([
         {
-          transform: `translate(${dx}px, ${dy}px) scale(2.35)`
+          transform: `translate(${dx}px, ${dy}px) scale(1.17)`
         },
         {
           transform: 'translate(0, 0) scale(1)'
