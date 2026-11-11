@@ -29,7 +29,7 @@
   header{
     width:100%;
     background:var(--amarillo);
-    padding:20px 24px;
+    padding:20px 24px 20px 16px;
     display:flex;
     align-items:center;
     gap:12px;
@@ -70,10 +70,13 @@
 
   /* progreso con chevrons estilo isologo: badge rojo con » blanco */
   .progreso{
-    display:flex;
-    gap:6px;
-    margin-bottom:24px;
+    display:flex; align-items:center; gap:6px; margin-bottom:24px;
   }
+  .progreso-texto{margin-left:auto;color:var(--gris);font-size:11px;font-weight:800;white-space:nowrap;}
+  .escala-ayuda{display:flex;justify-content:space-between;gap:12px;margin-top:9px;color:var(--gris);font-size:11px;font-weight:700;}
+  .opciones.escala-11{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:8px;}
+  .escala-11 .opcion{min-width:0;text-align:center;padding:12px 4px;font-size:15px;}
+  @media (max-width:380px){.escala-11 .opcion{padding:10px 2px;font-size:13px;}}
   .progreso .chev{
     font-family:'Archivo Black', sans-serif;
     font-size:14px;
@@ -240,6 +243,7 @@
     box-shadow:3px 3px 0 var(--negro);
   }
 
+  .nota-privacidad{margin-top:16px;color:var(--gris);font-size:11.5px;line-height:1.45;font-weight:600;}
   .campo-grupo{ margin-bottom:16px; }
   .campo-grupo:last-child{ margin-bottom:0; }
   .campo-label{
@@ -382,14 +386,15 @@
       <div class="tarjeta">
         <div class="contador">Pregunta 1 de 5</div>
         <div class="pregunta">¿Cuál es el principal motivo por el que dejaste de usar o usás menos Tarjeta Sucrédito?</div>
-        <div class="subnota">Podés elegir hasta 2 opciones</div>
+        <div class="subnota">Elegí el motivo principal</div>
         <div class="opciones" data-campo="motivo">
           <button type="button" class="opcion" data-valor="No encuentro beneficios o promociones que me interesen.">No encuentro beneficios o promociones que me interesen.</button>
           <button type="button" class="opcion" data-valor="Las cuotas o la financiación no me resultan convenientes.">Las cuotas o la financiación no me resultan convenientes.</button>
           <button type="button" class="opcion" data-valor="Tengo poco límite disponible.">Tengo poco límite disponible.</button>
-          <button type="button" class="opcion" data-valor="Prefiero utilizar otra tarjeta.">Prefiero utilizar otra tarjeta.</button>
-          <button type="button" class="opcion" data-valor="Tuve una mala experiencia.">Tuve una mala experiencia.</button>
-          <button type="button" class="opcion" data-valor="Tengo muchos compromisos de pago.">Tengo muchos compromisos de pago.</button>
+          <button type="button" class="opcion" data-valor="No encuentro comercios donde comprar.">No encuentro comercios donde comprar.</button>
+          <button type="button" class="opcion" data-valor="Prefiero utilizar otros medios de pago.">Prefiero utilizar otros medios de pago.</button>
+          <button type="button" class="opcion" data-valor="Tuve una mala experiencia o dificultad con la atención.">Tuve una mala experiencia o dificultad con la atención.</button>
+          <button type="button" class="opcion" data-valor="Actualmente no necesito financiar mis compras.">Actualmente no necesito financiar mis compras.</button>
           <button type="button" class="opcion" data-valor="Otro" data-otro="1">Otro motivo</button>
         </div>
         <input type="text" class="otro-input" data-campo-otro="motivo" placeholder="Contanos cuál...">
@@ -401,13 +406,13 @@
       <div class="tarjeta">
         <div class="contador">Pregunta 2 de 5</div>
         <div class="pregunta">¿Qué tarjeta o medio de pago estás usando principalmente en lugar de Sucrédito?</div>
-        <div class="subnota">Podés elegir hasta 2 opciones</div>
+        <div class="subnota">Elegí el medio que más utilizás</div>
         <div class="opciones" data-campo="medio_reemplazo">
           <button type="button" class="opcion" data-valor="Otra tarjeta de crédito.">Otra tarjeta de crédito.</button>
           <button type="button" class="opcion" data-valor="Tarjeta de débito.">Tarjeta de débito.</button>
           <button type="button" class="opcion" data-valor="Billetera virtual.">Billetera virtual.</button>
           <button type="button" class="opcion" data-valor="Efectivo.">Efectivo.</button>
-          <button type="button" class="opcion" data-valor="Efectivo, transferencias u otro medio de pago.">Efectivo, transferencias u otro medio de pago.</button>
+          <button type="button" class="opcion" data-valor="Transferencia bancaria.">Transferencia bancaria.</button>
           <button type="button" class="opcion" data-valor="Otro" data-otro="1">Otro</button>
         </div>
         <input type="text" class="otro-input" data-campo-otro="medio_reemplazo" placeholder="Contanos cuál...">
@@ -419,14 +424,14 @@
       <div class="tarjeta">
         <div class="contador">Pregunta 3 de 5</div>
         <div class="pregunta">¿Qué sería lo MÁS importante para que vuelvas a usar Tarjeta Sucrédito?</div>
-        <div class="subnota">Podés elegir hasta 2 opciones</div>
+        <div class="subnota">Elegí el cambio que más influiría en tu decisión</div>
         <div class="opciones" data-campo="incentivo_clave">
           <button type="button" class="opcion" data-valor="Más descuentos y promociones.">Más descuentos y promociones.</button>
           <button type="button" class="opcion" data-valor="Más cuotas sin interés y mejores condiciones de financiación.">Más cuotas sin interés y mejores condiciones de financiación.</button>
           <button type="button" class="opcion" data-valor="Mayor límite de compra.">Mayor límite de compra.</button>
-          <button type="button" class="opcion" data-valor="Más comercios adheridos.">Más comercios adheridos.</button>
-          <button type="button" class="opcion" data-valor="Ser Billetera Virtual.">Ser Billetera Virtual.</button>
-          <button type="button" class="opcion" data-valor="Una mejor atención/experiencia.">Una mejor atención/experiencia.</button>
+          <button type="button" class="opcion" data-valor="Más comercios adheridos cerca de mí.">Más comercios adheridos cerca de mí.</button>
+          <button type="button" class="opcion" data-valor="Poder gestionar y pagar desde una billetera digital.">Poder gestionar y pagar desde una billetera digital.</button>
+          <button type="button" class="opcion" data-valor="Una atención más rápida y sencilla.">Una atención más rápida y sencilla.</button>
           <button type="button" class="opcion" data-valor="Otro" data-otro="1">Otro</button>
         </div>
         <input type="text" class="otro-input" data-campo-otro="incentivo_clave" placeholder="Contanos cuál...">
@@ -438,12 +443,20 @@
       <div class="tarjeta">
         <div class="contador">Pregunta 4 de 5</div>
         <div class="pregunta">Pensando en tu experiencia con Sucrédito, ¿qué tan probable es que vuelvas a utilizarla?</div>
-        <div class="opciones" data-campo="probabilidad_retorno">
-          <button type="button" class="opcion" data-valor="Muy probable.">Muy probable.</button>
-          <button type="button" class="opcion" data-valor="Probable.">Probable.</button>
-          <button type="button" class="opcion" data-valor="Poco probable.">Poco probable.</button>
-          <button type="button" class="opcion" data-valor="Nada probable.">Nada probable.</button>
+        <div class="opciones escala-11" data-campo="probabilidad_retorno">
+          <button type="button" class="opcion" data-valor="0">0</button>
+          <button type="button" class="opcion" data-valor="1">1</button>
+          <button type="button" class="opcion" data-valor="2">2</button>
+          <button type="button" class="opcion" data-valor="3">3</button>
+          <button type="button" class="opcion" data-valor="4">4</button>
+          <button type="button" class="opcion" data-valor="5">5</button>
+          <button type="button" class="opcion" data-valor="6">6</button>
+          <button type="button" class="opcion" data-valor="7">7</button>
+          <button type="button" class="opcion" data-valor="8">8</button>
+          <button type="button" class="opcion" data-valor="9">9</button>
+          <button type="button" class="opcion" data-valor="10">10</button>
         </div>
+        <div class="escala-ayuda"><span>0 · Nada probable</span><span>10 · Muy probable</span></div>
       </div>
     </div>
 
@@ -453,10 +466,11 @@
         <div class="contador">Pregunta 5 de 5</div>
         <div class="pregunta">Si Sucrédito se convirtiera en una billetera digital, donde además de usar tu tarjeta pudieras pagar, transferir, acceder a promociones y disfrutar de otros servicios desde un mismo lugar, ¿qué tan probable sería que la elijas?</div>
         <div class="opciones" data-campo="mejora_sugerida">
-          <button type="button" class="opcion" data-valor="Muy probable, sería mi billetera principal.">Muy probable, sería mi billetera principal.</button>
-          <button type="button" class="opcion" data-valor="Probable, la probaría.">Probable, la probaría.</button>
-          <button type="button" class="opcion" data-valor="Poco probable, seguiría usando otras billeteras.">Poco probable, seguiría usando otras billeteras.</button>
-          <button type="button" class="opcion" data-valor="Nada probable, no me interesaría.">Nada probable, no me interesaría.</button>
+          <button type="button" class="opcion" data-valor="Muy interesado/a.">Muy interesado/a.</button>
+          <button type="button" class="opcion" data-valor="Bastante interesado/a.">Bastante interesado/a.</button>
+          <button type="button" class="opcion" data-valor="No estoy seguro/a, necesitaría más información.">No estoy seguro/a, necesitaría más información.</button>
+          <button type="button" class="opcion" data-valor="Poco interesado/a.">Poco interesado/a.</button>
+          <button type="button" class="opcion" data-valor="Nada interesado/a.">Nada interesado/a.</button>
         </div>
       </div>
     </div>
@@ -469,13 +483,14 @@
 
         <div class="campo-grupo">
           <label class="campo-label" for="campoDni">DNI</label>
-          <input type="text" id="campoDni" class="campo-simple" data-campo="dni" inputmode="numeric" pattern="[0-9]*" maxlength="9" placeholder="Sin puntos, ej: 30123456" required>
+          <input type="text" id="campoDni" class="campo-simple" data-campo="dni" inputmode="numeric" maxlength="8" pattern="[0-9]{7,8}" placeholder="Sin puntos, ej: 30123456" required>
         </div>
 
         <div class="campo-grupo">
           <label class="campo-label" for="campoEmail">Email</label>
           <input type="email" id="campoEmail" data-campo="email" placeholder="tu@email.com" required>
         </div>
+        <p class="nota-privacidad">Usaremos estos datos únicamente para identificar tu participación y enviarte el beneficio asociado a esta encuesta.</p>
       </div>
     </div>
 
@@ -485,7 +500,7 @@
         <img class="placa-beneficio" src="assets/Beneficio.png" alt="Tu beneficio Sucrédito">
         <div class="icono">✅</div>
         <h2>¡Listo, gracias!</h2>
-        <p>Recibimos tus respuestas. Muy pronto vas a recibir tu beneficio por email.</p>
+        <p>Gracias por participar. Si el envío se completó correctamente, vas a recibir tu beneficio en el email que ingresaste.</p>
       </div>
     </div>
 
@@ -514,8 +529,9 @@
   // ============================================================
 
   // Preguntas que admiten elegir más de una opción (con tope de 2)
-  const CAMPOS_MULTIPLE = ['motivo', 'medio_reemplazo', 'incentivo_clave'];
-  const MAX_SELECCIONES = 2;
+  // Respuesta única: permite identificar una causa o preferencia principal.
+  const CAMPOS_MULTIPLE = [];
+  const MAX_SELECCIONES = 1;
 
   const respuestas = {};
   let pasoActual = 0;
@@ -525,12 +541,18 @@
   function pintarProgreso(){
     const cont = document.getElementById('progreso');
     cont.innerHTML = '';
+    if(pasoActual===0 || pasoActual===7){ cont.style.display='none'; return; }
+    cont.style.display='flex';
     for(let i=1;i<=6;i++){
       const s = document.createElement('span');
       s.className = 'chev' + (i<=pasoActual ? ' activo':'');
       s.textContent = '»';
       cont.appendChild(s);
     }
+    const texto = document.createElement('span');
+    texto.className = 'progreso-texto';
+    texto.textContent = pasoActual<=5 ? `Pregunta ${pasoActual} de 5` : 'Tus datos';
+    cont.appendChild(texto);
   }
 
   function lanzarConfeti(){
@@ -568,15 +590,25 @@
       document.getElementById('navegacion').style.display='flex';
       if(i===0){ btnSig.textContent = 'Comenzar'; btnSig.disabled = false; }
       else if(i===6){ btnSig.textContent = 'Enviar'; btnSig.disabled = !pasoSeisValido(); }
-      else { btnSig.textContent = 'Siguiente'; btnSig.disabled = !respuestas[i]; }
+      else { btnSig.textContent = 'Siguiente'; btnSig.disabled = !pasoEncuestaValido(i); }
     }
     pintarProgreso();
   }
 
+  function pasoEncuestaValido(indice){
+    const paso = document.querySelector('.paso[data-paso="'+indice+'"]');
+    if(!respuestas[indice] || !paso) return false;
+    const opcionOtro = paso.querySelector('button.seleccionada[data-otro="1"]');
+    if(!opcionOtro) return true;
+    const detalle = paso.querySelector('.otro-input');
+    return !!(detalle && detalle.value.trim().length>0);
+  }
+
   function pasoSeisValido(){
     const dni = (respuestas['valor_dni']||'').trim();
+    const emailInput = document.getElementById('campoEmail');
     const email = (respuestas['valor_email']||'').trim();
-    return dni.length >= 7 && email.length > 3 && email.includes('@');
+    return /^[0-9]{7,8}$/.test(dni) && email.length > 0 && emailInput.checkValidity();
   }
 
   // Opciones tipo botón (single-select o multi-select con tope de 2, según el campo)
@@ -676,7 +708,7 @@
     if(pasoActual===6){
       document.getElementById('btnSiguiente').disabled = !pasoSeisValido();
     } else {
-      document.getElementById('btnSiguiente').disabled = !respuestas[pasoActual];
+      document.getElementById('btnSiguiente').disabled = !pasoEncuestaValido(pasoActual);
     }
   }
 
