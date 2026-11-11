@@ -29,7 +29,7 @@
   header{
     width:100%;
     background:var(--amarillo);
-    padding:20px 24px;
+    padding:20px 24px 20px 16px;
     display:flex;
     align-items:center;
     gap:12px;
@@ -590,9 +590,18 @@
       document.getElementById('navegacion').style.display='flex';
       if(i===0){ btnSig.textContent = 'Comenzar'; btnSig.disabled = false; }
       else if(i===6){ btnSig.textContent = 'Enviar'; btnSig.disabled = !pasoSeisValido(); }
-      else { btnSig.textContent = 'Siguiente'; btnSig.disabled = !respuestas[i]; }
+      else { btnSig.textContent = 'Siguiente'; btnSig.disabled = !pasoEncuestaValido(i); }
     }
     pintarProgreso();
+  }
+
+  function pasoEncuestaValido(indice){
+    const paso = document.querySelector('.paso[data-paso="'+indice+'"]');
+    if(!respuestas[indice] || !paso) return false;
+    const opcionOtro = paso.querySelector('button.seleccionada[data-otro="1"]');
+    if(!opcionOtro) return true;
+    const detalle = paso.querySelector('.otro-input');
+    return !!(detalle && detalle.value.trim().length>0);
   }
 
   function pasoSeisValido(){
@@ -699,7 +708,7 @@
     if(pasoActual===6){
       document.getElementById('btnSiguiente').disabled = !pasoSeisValido();
     } else {
-      document.getElementById('btnSiguiente').disabled = !respuestas[pasoActual];
+      document.getElementById('btnSiguiente').disabled = !pasoEncuestaValido(pasoActual);
     }
   }
 
