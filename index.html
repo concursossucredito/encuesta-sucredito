@@ -414,7 +414,7 @@
     <div class="paso visible" data-paso="0">
       <div class="tarjeta intro">
         <h1>Queremos volver a ser tu tarjeta de todos los días 💳</h1>
-        <p>Queremos conocer tu experiencia para mejorar nuestros beneficios y servicios. Son solo 6 preguntas.</p>
+        <p>Queremos conocer tu experiencia para mejorar nuestros beneficios y servicios. Son solo 5 preguntas.</p>
       </div>
     </div>
 
@@ -475,10 +475,26 @@
       </div>
     </div>
 
-    <!-- Paso 4 -->
+    <!-- Paso 5 -->
     <div class="paso" data-paso="4">
       <div class="tarjeta">
-        <div class="contador">Pregunta 4 de 6</div>
+        <div class="contador">Pregunta 4 de 5</div>
+        <div class="pregunta">Si Sucrédito se convirtiera en una billetera digital, donde además de usar tu tarjeta pudieras pagar, transferir, acceder a promociones y disfrutar de otros servicios desde un mismo lugar, ¿qué tan probable sería que la elijas?</div>
+        <div class="opciones" data-campo="mejora_sugerida">
+          <button type="button" class="opcion" data-valor="Muy interesado/a.">Muy interesado/a.</button>
+          <button type="button" class="opcion" data-valor="Bastante interesado/a.">Bastante interesado/a.</button>
+          <button type="button" class="opcion" data-valor="No estoy seguro/a, necesitaría más información.">No estoy seguro/a, necesitaría más información.</button>
+          <button type="button" class="opcion" data-valor="Poco interesado/a.">Poco interesado/a.</button>
+          <button type="button" class="opcion" data-valor="Nada interesado/a.">Nada interesado/a.</button>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Paso 4 -->
+    <div class="paso" data-paso="5">
+      <div class="tarjeta">
+        <div class="contador">Pregunta 5 de 5</div>
         <div class="pregunta">Pensando en tu experiencia con Sucrédito, ¿qué tan probable es que vuelvas a utilizarla?</div>
         <div class="opciones escala-11" data-campo="probabilidad_retorno">
           <button type="button" class="opcion" data-valor="0">0</button>
@@ -497,40 +513,8 @@
       </div>
     </div>
 
-    <!-- Paso 5 -->
-    <div class="paso" data-paso="5">
-      <div class="tarjeta">
-        <div class="contador">Pregunta 5 de 6</div>
-        <div class="pregunta">Si Sucrédito se convirtiera en una billetera digital, donde además de usar tu tarjeta pudieras pagar, transferir, acceder a promociones y disfrutar de otros servicios desde un mismo lugar, ¿qué tan probable sería que la elijas?</div>
-        <div class="opciones" data-campo="mejora_sugerida">
-          <button type="button" class="opcion" data-valor="Muy interesado/a.">Muy interesado/a.</button>
-          <button type="button" class="opcion" data-valor="Bastante interesado/a.">Bastante interesado/a.</button>
-          <button type="button" class="opcion" data-valor="No estoy seguro/a, necesitaría más información.">No estoy seguro/a, necesitaría más información.</button>
-          <button type="button" class="opcion" data-valor="Poco interesado/a.">Poco interesado/a.</button>
-          <button type="button" class="opcion" data-valor="Nada interesado/a.">Nada interesado/a.</button>
-        </div>
-      </div>
-    </div>
-
-
-    <!-- Paso 6: antigüedad sin uso -->
-    <div class="paso" data-paso="6">
-      <div class="tarjeta">
-        <div class="contador">Pregunta 6 de 6</div>
-        <div class="pregunta">¿Hace cuánto tiempo que no utilizás tu Tarjeta Sucrédito?</div>
-        <div class="subnota">Elegí la opción que mejor represente tu situación</div>
-        <div class="opciones" data-campo="tiempo_sin_uso">
-          <button type="button" class="opcion" data-valor="Menos de 30 días.">Menos de 30 días.</button>
-          <button type="button" class="opcion" data-valor="Entre 1 y 3 meses.">Entre 1 y 3 meses.</button>
-          <button type="button" class="opcion" data-valor="Entre 3 y 6 meses.">Entre 3 y 6 meses.</button>
-          <button type="button" class="opcion" data-valor="Entre 6 y 12 meses.">Entre 6 y 12 meses.</button>
-          <button type="button" class="opcion" data-valor="Más de un año.">Más de un año.</button>
-        </div>
-      </div>
-    </div>
-
     <!-- Paso final -->
-    <div class="paso final" data-paso="7">
+    <div class="paso final" data-paso="6">
       <div class="tarjeta">
         <div class="icono">✅</div>
         <h2>¡Gracias por tu tiempo!</h2>
@@ -570,14 +554,14 @@
   const respuestas = {};
   let pasoActual = 0;
   const pasos = document.querySelectorAll('.paso');
-  const totalPasos = pasos.length - 1; // sin contar el paso final (index 7)
+  const totalPasos = pasos.length - 1; // sin contar el paso final (index 6)
 
   function pintarProgreso(){
     const cont = document.getElementById('progreso');
     cont.innerHTML = '';
-    if(pasoActual===0 || pasoActual===7){ cont.style.display='none'; return; }
+    if(pasoActual===0 || pasoActual===6){ cont.style.display='none'; return; }
     cont.style.display='flex';
-    for(let i=1;i<=6;i++){
+    for(let i=1;i<=5;i++){
       const s = document.createElement('span');
       s.className = 'chev' + (i<=pasoActual ? ' activo':'');
       s.textContent = '»';
@@ -585,7 +569,7 @@
     }
     const texto = document.createElement('span');
     texto.className = 'progreso-texto';
-    texto.textContent = `Pregunta ${pasoActual} de 6`;
+    texto.textContent = `Pregunta ${pasoActual} de 5`;
     cont.appendChild(texto);
   }
 
@@ -617,13 +601,13 @@
     btnAtras.style.display = (i===0) ? 'none' : 'inline-block';
 
     const btnSig = document.getElementById('btnSiguiente');
-    if(i===7){
+    if(i===6){
       document.getElementById('navegacion').style.display='none';
       lanzarConfeti();
     } else {
       document.getElementById('navegacion').style.display='flex';
       if(i===0){ btnSig.textContent = 'Comenzar'; btnSig.disabled = false; }
-      else { btnSig.textContent = (i===6) ? 'Enviar encuesta' : 'Siguiente'; btnSig.disabled = !pasoEncuestaValido(i); }
+      else { btnSig.textContent = (i===5) ? 'Enviar encuesta' : 'Siguiente'; btnSig.disabled = !pasoEncuestaValido(i); }
     }
     pintarProgreso();
   }
@@ -734,7 +718,7 @@
   });
 
   document.getElementById('btnSiguiente').addEventListener('click', async ()=>{
-    if(pasoActual < 6){
+    if(pasoActual < 5){
       pasoActual++;
       mostrarPaso(pasoActual);
     } else {
@@ -765,7 +749,6 @@
         incentivo_clave: textoDeCampo('incentivo_clave'),
         probabilidad_retorno: respuestas['valor_probabilidad_retorno'] || '',
         mejora_sugerida: respuestas['valor_mejora_sugerida'] || '',
-        tiempo_sin_uso: respuestas['valor_tiempo_sin_uso'] || '',
         fecha: new Date().toISOString()
       };
       try{
@@ -778,7 +761,7 @@
       }catch(e){
         console.error('Error enviando encuesta', e);
       }
-      pasoActual = 7;
+      pasoActual = 6;
       mostrarPaso(pasoActual);
     }
   });
