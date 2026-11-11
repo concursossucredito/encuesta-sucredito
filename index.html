@@ -8,13 +8,14 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@1,800&family=Archivo+Black&family=Inter:wght@500;600;700;800&display=swap" rel="stylesheet">
 <style>
   :root{
-    --amarillo:#FFEE00;
-    --amarillo-oscuro:#E6D600;
-    --negro:#14120C;
-    --rojo:#E4032E;
-    --rojo-oscuro:#A80121;
-    --crema:#FFFDF3;
-    --gris:#6b6659;
+    --amarillo:#FFF000;
+    --amarillo-oscuro:#E6D900;
+    --negro:#191919;
+    --rojo:#E30613;
+    --rojo-oscuro:#B80510;
+    --crema:#FFFFFF;
+    --gris:#666666;
+    --gris-suave:#F2F2F2;
   }
   *{box-sizing:border-box; margin:0; padding:0;}
   body{
@@ -80,8 +81,8 @@
   .progreso .chev{
     font-family:'Archivo Black', sans-serif;
     font-size:14px;
-    color:rgba(20,18,12,0.28);
-    background:rgba(20,18,12,0.08);
+    color:rgba(25,25,25,0.28);
+    background:rgba(25,25,25,0.08);
     padding:4px 9px 6px;
     border-radius:4px;
     transform:skewX(-10deg);
@@ -175,7 +176,7 @@
     transition:background .15s ease, color .15s ease, transform .15s ease, box-shadow .15s ease;
   }
   .opcion:hover{
-    background:#fff6b8;
+    background:var(--gris-suave);
     transform:translate(-2px,-2px);
     box-shadow:3px 3px 0 var(--negro);
   }
@@ -357,7 +358,7 @@
   footer.footer-marca span.texto{
     font-family:'Archivo Black', sans-serif;
     font-size:12px;
-    color:rgba(20,18,12,0.55);
+    color:rgba(25,25,25,0.55);
     letter-spacing:.4px;
   }
 </style>
@@ -512,8 +513,8 @@
   <span class="footer-marca-grupo">
     <span class="texto">SUCRÉDITO</span>
     <svg width="20" height="15" viewBox="0 0 34 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <rect width="34" height="24" rx="5" fill="#E4032E"/>
-      <path d="M7 5 L15 12 L7 19" stroke="white" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/>
+      <rect width="34" height="24" rx="5" fill="#E30613"/>
+      <path d="M7 5 L15 12 L7 19" stroke="#FFFFFF" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/>
       <path d="M17 5 L25 12 L17 19" stroke="white" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/>
     </svg>
   </span>
@@ -553,7 +554,7 @@
   }
 
   function lanzarConfeti(){
-    const colores = ['#E4032E', '#FFEE00', '#14120C', '#FFFDF3', '#A80121'];
+    const colores = ['#E30613', '#FFF000', '#191919', '#FFFFFF', '#B80510'];
     const cantidad = 60;
     for(let i=0;i<cantidad;i++){
       const pieza = document.createElement('div');
