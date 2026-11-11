@@ -377,7 +377,7 @@
     <div class="paso visible" data-paso="0">
       <div class="tarjeta intro">
         <h1>Queremos volver a ser tu tarjeta de todos los días 💳</h1>
-        <p>Queremos conocer tu experiencia para mejorar nuestros beneficios y servicios. Son solo 5 preguntas.</p>
+        <p>Queremos conocer tu experiencia para mejorar nuestros beneficios y servicios. Son solo 6 preguntas.</p>
       </div>
     </div>
 
@@ -476,31 +476,28 @@
     </div>
 
 
-    <!-- Paso 6: DNI + email -->
+    <!-- Paso 6: antigüedad sin uso -->
     <div class="paso" data-paso="6">
       <div class="tarjeta">
-        <div class="pregunta">Dejanos tus datos para enviarte tu beneficio</div>
-
-        <div class="campo-grupo">
-          <label class="campo-label" for="campoDni">DNI</label>
-          <input type="text" id="campoDni" class="campo-simple" data-campo="dni" inputmode="numeric" maxlength="8" pattern="[0-9]{7,8}" placeholder="Sin puntos, ej: 30123456" required>
+        <div class="contador">Pregunta 6 de 6</div>
+        <div class="pregunta">¿Hace cuánto tiempo que no utilizás tu Tarjeta Sucrédito?</div>
+        <div class="subnota">Elegí la opción que mejor represente tu situación</div>
+        <div class="opciones" data-campo="tiempo_sin_uso">
+          <button type="button" class="opcion" data-valor="Menos de 30 días.">Menos de 30 días.</button>
+          <button type="button" class="opcion" data-valor="Entre 1 y 3 meses.">Entre 1 y 3 meses.</button>
+          <button type="button" class="opcion" data-valor="Entre 3 y 6 meses.">Entre 3 y 6 meses.</button>
+          <button type="button" class="opcion" data-valor="Entre 6 y 12 meses.">Entre 6 y 12 meses.</button>
+          <button type="button" class="opcion" data-valor="Más de un año.">Más de un año.</button>
         </div>
-
-        <div class="campo-grupo">
-          <label class="campo-label" for="campoEmail">Email</label>
-          <input type="email" id="campoEmail" data-campo="email" placeholder="tu@email.com" required>
-        </div>
-        <p class="nota-privacidad">Usaremos estos datos únicamente para identificar tu participación y enviarte el beneficio asociado a esta encuesta.</p>
       </div>
     </div>
 
     <!-- Paso final -->
     <div class="paso final" data-paso="7">
       <div class="tarjeta">
-        <img class="placa-beneficio" src="assets/Beneficio.png" alt="Tu beneficio Sucrédito">
         <div class="icono">✅</div>
-        <h2>¡Listo, gracias!</h2>
-        <p>Gracias por participar. Si el envío se completó correctamente, vas a recibir tu beneficio en el email que ingresaste.</p>
+        <h2>¡Gracias por tu tiempo!</h2>
+        <p>Tu respuesta nos ayuda a conocer mejor tu experiencia y seguir mejorando Sucrédito.</p>
       </div>
     </div>
 
@@ -551,7 +548,7 @@
     }
     const texto = document.createElement('span');
     texto.className = 'progreso-texto';
-    texto.textContent = pasoActual<=5 ? `Pregunta ${pasoActual} de 5` : 'Tus datos';
+    texto.textContent = `Pregunta ${pasoActual} de 6`;
     cont.appendChild(texto);
   }
 
@@ -589,8 +586,7 @@
     } else {
       document.getElementById('navegacion').style.display='flex';
       if(i===0){ btnSig.textContent = 'Comenzar'; btnSig.disabled = false; }
-      else if(i===6){ btnSig.textContent = 'Enviar'; btnSig.disabled = !pasoSeisValido(); }
-      else { btnSig.textContent = 'Siguiente'; btnSig.disabled = !pasoEncuestaValido(i); }
+      else { btnSig.textContent = (i===6) ? 'Enviar encuesta' : 'Siguiente'; btnSig.disabled = !pasoEncuestaValido(i); }
     }
     pintarProgreso();
   }
@@ -602,13 +598,6 @@
     if(!opcionOtro) return true;
     const detalle = paso.querySelector('.otro-input');
     return !!(detalle && detalle.value.trim().length>0);
-  }
-
-  function pasoSeisValido(){
-    const dni = (respuestas['valor_dni']||'').trim();
-    const emailInput = document.getElementById('campoEmail');
-    const email = (respuestas['valor_email']||'').trim();
-    return /^[0-9]{7,8}$/.test(dni) && email.length > 0 && emailInput.checkValidity();
   }
 
   // Opciones tipo botón (single-select o multi-select con tope de 2, según el campo)
@@ -683,15 +672,10 @@
     }
   });
 
-  // Campos de texto (textarea, email, dni, "otro")
+  // Campos de texto y opciones "Otro"
   document.querySelectorAll('textarea[data-campo], input[data-campo], .otro-input').forEach(campo=>{
     campo.addEventListener('input', ()=>{
       const pasoDiv = campo.closest('.paso');
-
-      // DNI: solo números
-      if(campo.dataset.campo === 'dni'){
-        campo.value = campo.value.replace(/\D/g,'');
-      }
 
       if(campo.classList.contains('otro-input')){
         respuestas['valor_'+campo.dataset.campoOtro+'_detalle'] = campo.value;
@@ -705,11 +689,7 @@
 
   function actualizarBoton(){
     if(pasoActual===0) return;
-    if(pasoActual===6){
-      document.getElementById('btnSiguiente').disabled = !pasoSeisValido();
-    } else {
-      document.getElementById('btnSiguiente').disabled = !pasoEncuestaValido(pasoActual);
-    }
+    document.getElementById('btnSiguiente').disabled = !pasoEncuestaValido(pasoActual);
   }
 
   document.getElementById('btnAtras').addEventListener('click', ()=>{
@@ -748,8 +728,7 @@
         incentivo_clave: textoDeCampo('incentivo_clave'),
         probabilidad_retorno: respuestas['valor_probabilidad_retorno'] || '',
         mejora_sugerida: respuestas['valor_mejora_sugerida'] || '',
-        dni: respuestas['valor_dni'] || '',
-        email: respuestas['valor_email'] || '',
+        tiempo_sin_uso: respuestas['valor_tiempo_sin_uso'] || '',
         fecha: new Date().toISOString()
       };
       try{
