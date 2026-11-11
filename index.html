@@ -20,7 +20,7 @@
   *{box-sizing:border-box; margin:0; padding:0;}
   body{
     font-family:'Inter', Arial, sans-serif;
-    background:var(--amarillo);
+    background:#FFFFFF;
     min-height:100vh;
     display:flex;
     flex-direction:column;
@@ -29,12 +29,13 @@
   }
   header{
     width:100%;
-    background:var(--amarillo);
-    padding:20px 24px 20px 16px;
+    background:#FFFFFF;
+    padding:18px 24px 18px 16px;
     display:flex;
     align-items:center;
     gap:12px;
-    border-bottom:5px solid var(--negro);
+    border-bottom:4px solid var(--amarillo);
+    box-shadow:0 2px 12px rgba(25,25,25,.04);
   }
    .logo-header{
     height:38px;
@@ -75,9 +76,44 @@
   }
   .progreso-texto{margin-left:auto;color:var(--gris);font-size:11px;font-weight:800;white-space:nowrap;}
   .escala-ayuda{display:flex;justify-content:space-between;gap:12px;margin-top:9px;color:var(--gris);font-size:11px;font-weight:700;}
-  .opciones.escala-11{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:8px;}
-  .escala-11 .opcion{min-width:0;text-align:center;padding:12px 4px;font-size:15px;}
-  @media (max-width:380px){.escala-11 .opcion{padding:10px 2px;font-size:13px;}}
+  .opciones.escala-11{
+    display:grid;
+    grid-template-columns:repeat(11,minmax(0,1fr));
+    gap:6px;
+    align-items:center;
+  }
+  .escala-11 .opcion{
+    min-width:0;
+    aspect-ratio:1/1;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:0;
+    border:1.5px solid #D9D9D9;
+    border-radius:12px;
+    background:#F7F7F7;
+    box-shadow:none;
+    font-size:14px;
+    font-weight:800;
+    text-align:center;
+    transition:background .18s ease,border-color .18s ease,color .18s ease,transform .18s ease;
+  }
+  .escala-11 .opcion:hover{
+    background:#FFF9A8;
+    border-color:var(--amarillo-oscuro);
+    transform:translateY(-2px);
+    box-shadow:none;
+  }
+  .escala-11 .opcion.seleccionada{
+    background:var(--amarillo);
+    border:2px solid var(--negro);
+    color:var(--negro);
+    box-shadow:0 3px 0 var(--negro);
+  }
+  @media (max-width:380px){
+    .opciones.escala-11{gap:4px;}
+    .escala-11 .opcion{font-size:12px;border-radius:9px;}
+  }
   .progreso .chev{
     font-family:'Archivo Black', sans-serif;
     font-size:14px;
@@ -103,11 +139,11 @@
   .paso.visible{ display:block; }
 
   .tarjeta{
-    background:var(--crema);
-    border:3px solid var(--negro);
-    border-radius:16px;
+    background:#FFFFFF;
+    border:1px solid #EAEAEA;
+    border-radius:18px;
     padding:28px 24px;
-    box-shadow:7px 7px 0 var(--negro);
+    box-shadow:0 8px 28px rgba(25,25,25,.07);
     animation:apareceCard .35s ease;
   }
   @keyframes apareceCard{
