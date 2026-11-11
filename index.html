@@ -483,7 +483,7 @@
 
         <div class="campo-grupo">
           <label class="campo-label" for="campoDni">DNI</label>
-          <input type="text" id="campoDni" class="campo-simple" data-campo="dni" inputmode="numeric" pattern="[0-9]*" maxlength="8" pattern="[0-9]{7,8}" placeholder="Sin puntos, ej: 30123456" required>
+          <input type="text" id="campoDni" class="campo-simple" data-campo="dni" inputmode="numeric" maxlength="8" pattern="[0-9]{7,8}" placeholder="Sin puntos, ej: 30123456" required>
         </div>
 
         <div class="campo-grupo">
@@ -599,7 +599,7 @@
     const dni = (respuestas['valor_dni']||'').trim();
     const emailInput = document.getElementById('campoEmail');
     const email = (respuestas['valor_email']||'').trim();
-    return /^\\d{7,8}$/.test(dni) && email.length > 0 && emailInput.checkValidity();
+    return /^[0-9]{7,8}$/.test(dni) && email.length > 0 && emailInput.checkValidity();
   }
 
   // Opciones tipo botón (single-select o multi-select con tope de 2, según el campo)
